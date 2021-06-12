@@ -1,0 +1,38 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    @include desktop {
+        margin: 0 10rem 0;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 9.5rem;
+    }
+    .rights-reserved {
+        font-family: $ibmPlexMono;
+        color: $darkFont;
+        line-height: 2.2rem;
+        margin-top: 2.4rem;
+        @include desktop {
+            margin: 0;
+            font-size: 1.6rem;
+            line-height: 2.8rem;
+        }
+    }
+    .social-icons {
+        display: flex;
+        list-style: none;
+        // no lo soportan los browsers
+        // gap: 3.8rem;
+        margin: 1.6rem 0 3.1rem;
+        .fab {
+            margin: 0 1.9rem 0;
+            color: $darkFont;
+        }
+        @include desktop {
+            margin: 0;
+        }
+    }
+}

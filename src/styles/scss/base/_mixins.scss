@@ -1,0 +1,19 @@
+@mixin tablet {
+    @media screen and(min-width: 700px) {
+        @content;
+    }
+};
+
+@mixin desktop {
+    @media screen and(min-width: 1020px) {
+        @content;
+    }
+};
+
+@mixin grid($columns, $gap) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
+    
+}
+

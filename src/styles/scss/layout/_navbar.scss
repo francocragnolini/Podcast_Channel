@@ -1,0 +1,141 @@
+//  COSAS QUE SOLUCIONAR
+// 1-solucionar el problema de cuando el checkbox esta chequeado no funciona el menu en desktop
+// haciendo un analisis creo que al tener un display none por default(.menu) y luego 
+// cuando esta chequeado el checkbox(.checkbox) tengo que aplicarle un display flex column
+// eso me arrastra la falla al modo desktop y me lo mantiene como columna en lugar de row
+// SOLUCION ENCONTRADA: le aplica al .checkbox:checked .menu una media query desktop con un display flex
+// -flex-direcion: row (por default)
+
+.menu {
+    display: none;
+    width: 100%;
+    height: auto;
+    background-color:  #0000EC;
+    padding-top: 1.6rem;
+    position: absolute;
+    top: 44px;
+
+    @include desktop {
+        padding: 0;
+        background-color: $white;
+        position: unset;
+        width: unset;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin-right: 10rem;
+    }   
+    .link {
+        text-decoration: none;
+        color: $whiteFont;
+        text-align: center;
+        text-transform: uppercase;
+        font-family: $ibmPlexMono;
+        font-weight: $regular;
+        font-size: 1.6rem;
+        line-height: 28px;
+        margin-bottom: 2.4rem;
+        @include desktop {
+            color: $darkFont;
+            margin: 0;
+            &:hover {
+                color: #00F3BB;
+                text-decoration: line-through;
+            }
+            &:active {
+                color: rgba(6,10,36,0.56);
+                text-decoration: line-through;
+            }
+        }
+    }
+}
+
+
+.navbar {
+    height: 4.4rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include desktop {
+        height: 8rem;
+    }
+}
+// margenes para mobile viewport
+.logo, .burger {
+    margin: 0 1.6rem;
+}
+
+// margen y aumento de tamaño del logo para desktop
+.logo {
+    @include desktop {
+        margin: 0 0 0 10rem;
+    }
+    .logo-img {
+        @include desktop {
+            width: 3.6rem;
+            height: 3.6rem;
+        }
+    }
+}
+
+// icono hamburguesa con after y before
+.burger {
+    &:after, &:before {
+        content: "";
+        display: block;
+        background-color: $black;
+        width: 18px;
+        height: 2px;
+        margin: 3px 0;
+    }
+    .burger-icon {
+        display: block;
+        background-color: $black;
+        width: 18px;
+        height: 2px;
+    }
+    // sacar del maquetado al icono cuando estoy en desktop
+    @include desktop {
+        display: none;
+    }
+}
+
+
+.checkbox {
+    visibility: hidden;
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    @include desktop {
+        display: none;
+    }
+    &:checked ~{
+        // hacer la cruz cuando el input esta chequeado
+        .burger {
+            position: relative;
+            &:before {
+                position: absolute;
+                transform: rotate(-45deg);
+            }
+             &:after {
+                position: absolute;
+                transform: rotate(45deg);
+                top: 0;
+            }
+            .burger-icon {
+                position: relative;
+                background-color: transparent;
+                top: 0;
+            }
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            // le aplico display flex(row por default) para evitar el cambio de propiedades cuando el checkbox esta chequeado
+           @include desktop {
+               flex-direction: row;
+           }
+        }
+    }
+}
